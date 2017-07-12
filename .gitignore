@@ -1,0 +1,5 @@
+*.dSYM
+*.a
+*.framework
+*.xcuserdata*
+*/xcuserdata*
