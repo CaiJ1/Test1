@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		011BA0E21EEEBB3D00F94711 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 011BA0E11EEEBB3D00F94711 /* main.cpp */; };
+		011BA0E21EEEBB3D00F94711 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 011BA0E11EEEBB3D00F94711 /* main.mm */; };
+		01E5A35F1EF8F6E0006A9DBA /* jiacai.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01E5A35E1EF8F6E0006A9DBA /* jiacai.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +25,9 @@
 
 /* Begin PBXFileReference section */
 		011BA0DE1EEEBB3D00F94711 /* PracticesOne */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PracticesOne; sourceTree = BUILT_PRODUCTS_DIR; };
-		011BA0E11EEEBB3D00F94711 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		011BA0E11EEEBB3D00F94711 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		01E5A35D1EF8F6E0006A9DBA /* jiacai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jiacai.h; sourceTree = "<group>"; };
+		01E5A35E1EF8F6E0006A9DBA /* jiacai.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = jiacai.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +60,9 @@
 		011BA0E01EEEBB3D00F94711 /* PracticesOne */ = {
 			isa = PBXGroup;
 			children = (
-				011BA0E11EEEBB3D00F94711 /* main.cpp */,
+				011BA0E11EEEBB3D00F94711 /* main.mm */,
+				01E5A35D1EF8F6E0006A9DBA /* jiacai.h */,
+				01E5A35E1EF8F6E0006A9DBA /* jiacai.mm */,
 			);
 			path = PracticesOne;
 			sourceTree = "<group>";
@@ -120,7 +125,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				011BA0E21EEEBB3D00F94711 /* main.cpp in Sources */,
+				01E5A35F1EF8F6E0006A9DBA /* jiacai.mm in Sources */,
+				011BA0E21EEEBB3D00F94711 /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +257,7 @@
 				011BA0E71EEEBB3D00F94711 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
