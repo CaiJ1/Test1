@@ -13,78 +13,65 @@
 //#include "jiacai.h"
 using namespace std;
 
-struct free_throws {
-    string name;
-    int made;
-    int attempts;
-    float percent;
-};
+#include <string>
 
-void display(const free_throws &ft);
-void set_pc(free_throws &ft);
-free_throws & accumulate(free_throws &target, const free_throws &source);
+const int LIMIT = 5;
+
+void file_it(ostream &os, double fo, const double fe[], int n) {
+    ios_base::fmtflags initial;
+    initial = os.setf(ios_base::fixed);     //save initial formatting state
+    os.precision(0);
+    os << "Focal length of objective:" << fo << " mm\n";
+    os.setf(ios_base::showpoint);
+    os.precision(1);
+    os.width(12);
+    os << "f.1. eyepiece" ;
+    os.width(15);
+    os << "magnification" << endl;
+    for (int i = 0; i < n ; i++) {
+        os.width(12);
+        os << fe[i];
+        os.width(15);
+        os << int(fo / fe[i] + 0.5) << endl;
+    }
+    os.setf(initial);   //restore initial formatting state
+    
+}
 
 void test() {
   
-    //partial initializations - remaining members set to 0
-    free_throws one {"one", 13, 14};
-    free_throws two {"two", 10, 16};
-    free_throws three {"three", 7, 9};
-    free_throws fout {"four", 5, 9};
-    free_throws five {"five", 6, 14};
-    free_throws team {"team", 0, 0};
+    ofstream fout ;
+    const char *fn = "ep-data.txt";
+    fout.open(fn);
+    if (!fout.is_open()) {
+        cout << "Can't open" << fn << ". Bye.\n";
+        exit(EXIT_FAILURE);
+    }
+    double objective;
+    cout << "Enter the focal length of your "
+    "telescope objective in mm: ";
+    cin >> objective;
+    double eps[LIMIT];
+    cout << "Enter the focal lengths, in mm, of " << LIMIT
+    << " eyepieces: \n";
+    for (int i = 0; i < LIMIT; i++) {
+        cout << "Eyepiece #" << i + 1 << ": ";
+        cin >> eps[i];
+    }
+    file_it(fout, objective, eps, LIMIT);
+    file_it(cout, objective, eps, LIMIT);
     
-    //no initialization
-    free_throws dup;
+    cout << "Done!" << endl;
     
-    set_pc(one);
-    display(one);
-    accumulate(team, one);
-    display(team);
-    
-    //use return value as argument
-    display(accumulate(team, two));
-    accumulate(accumulate(team, three), fout);
-    display(team);
-    
-    //use return value in assignment
-    dup = accumulate(team, five);
-    cout << "Displaying team:\n";
-    display(team);
-    cout << "Displaying dup after assignment:\n";
-    display(dup);
-    set_pc(fout);
-    
-    accumulate(dup, five) = fout;
-    display(dup);
-    display(team);
 }
 
-void display(const free_throws &ft) {
-    cout << "Name: " << ft.name << endl;
-    cout << "Made: " << ft.made << endl;
-    cout << "Attempts: " << ft.attempts << endl;
-    cout << "Percent: " << ft.percent << endl << endl;
-}
-void set_pc(free_throws &ft) {
-    if (ft.attempts != 0) {
-        ft.percent = 100.f * float(ft.made / float(ft.attempts));
-    }
-    else {
-        ft.percent = 0;
-    }
-}
-free_throws & accumulate(free_throws &target, const free_throws &source) {
-    target.attempts += source.attempts;
-    target.made += source.made;
-    set_pc(target);
-    return target;
-}
+
 
 int main(int argc, const char * argv[]) {
     
     test();
     
     cout << endl;
+    
     return 0;
 }
