@@ -10,56 +10,65 @@
 #import <fstream>
 #include <vector>
 #include <array>
+#include <string>
 //#include "jiacai.h"
 using namespace std;
 
-#include <string>
+template <typename T>   //or class T
+void Swap(T &a, T &b) {
+    T temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
 
-const int LIMIT = 5;
-
-void file_it(ostream &os, double fo, const double fe[], int n) {
-    ios_base::fmtflags initial;
-    initial = os.setf(ios_base::fixed);     //save initial formatting state
-    os.precision(0);
-    os << "Focal length of objective:" << fo << " mm\n";
-    os.setf(ios_base::showpoint);
-    os.precision(1);
-    os.width(12);
-    os << "f.1. eyepiece" ;
-    os.width(15);
-    os << "magnification" << endl;
-    for (int i = 0; i < n ; i++) {
-        os.width(12);
-        os << fe[i];
-        os.width(15);
-        os << int(fo / fe[i] + 0.5) << endl;
+template <typename T>   //new template
+void Swap(T *a, T *b, int n) {
+    T temp;
+    for (int i = 0 ; i < n; i++) {
+        temp = a[i];
+        a[i] = b[i];
+        b[i] = temp;
     }
-    os.setf(initial);   //restore initial formatting state
-    
+}
+const int Lim = 8;
+void Show(int a[]) {
+    cout << a[0] << a[1] << "/";
+    cout << a[2] << a[3] << "/";
+    for (int i = 4; i < Lim ; i++) {
+        cout << a[i];
+    }
+    cout  << endl;
 }
 
 void test() {
   
-    ofstream fout ;
-    const char *fn = "ep-data.txt";
-    fout.open(fn);
-    if (!fout.is_open()) {
-        cout << "Can't open" << fn << ". Bye.\n";
-        exit(EXIT_FAILURE);
-    }
-    double objective;
-    cout << "Enter the focal length of your "
-    "telescope objective in mm: ";
-    cin >> objective;
-    double eps[LIMIT];
-    cout << "Enter the focal lengths, in mm, of " << LIMIT
-    << " eyepieces: \n";
-    for (int i = 0; i < LIMIT; i++) {
-        cout << "Eyepiece #" << i + 1 << ": ";
-        cin >> eps[i];
-    }
-    file_it(fout, objective, eps, LIMIT);
-    file_it(cout, objective, eps, LIMIT);
+    int i = 10 ;
+    int j = 20;
+    cout << "i, j = " << i << ", " << j << endl;
+    cout << "Using compiler-generated int swappper\n";
+    Swap(i, j);
+    cout << "Now i, j = " << i << ", " << j << endl;
+    
+    double x = 22.2;
+    double y = 33.3;
+    cout << "x, y = " << x << ", " << y << endl;
+    cout << "Using compiler-generated doubel swapper\n";
+    Swap(x, y);
+     cout << "Now x, y = " << x << ", " << y << endl;
+    
+    
+    
+    int d1[Lim] {1,1,1,1,1,1,1};
+    int d2[Lim] {2,2,2,2,2,2,2,2};
+    cout << "Original arrays:\n";
+    Show(d1);
+    Show(d2);
+    
+    Swap(d1 , d2, Lim);
+    cout << "Swapped arrays:\n";
+    Show(d1);
+    Show(d2);
     
     cout << "Done!" << endl;
     
