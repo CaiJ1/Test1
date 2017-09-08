@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		011BA0E21EEEBB3D00F94711 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 011BA0E11EEEBB3D00F94711 /* main.mm */; };
-		01E5A35F1EF8F6E0006A9DBA /* jiacai.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01E5A35E1EF8F6E0006A9DBA /* jiacai.mm */; };
+		01D08D4E1F6154A500BD9240 /* JCQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01D08D4C1F6154A500BD9240 /* JCQueue.cpp */; };
+		01D08D511F626CC600BD9240 /* JCCustomer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01D08D4F1F626CC600BD9240 /* JCCustomer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +27,10 @@
 /* Begin PBXFileReference section */
 		011BA0DE1EEEBB3D00F94711 /* PracticesOne */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PracticesOne; sourceTree = BUILT_PRODUCTS_DIR; };
 		011BA0E11EEEBB3D00F94711 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		01E5A35D1EF8F6E0006A9DBA /* jiacai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jiacai.h; sourceTree = "<group>"; };
-		01E5A35E1EF8F6E0006A9DBA /* jiacai.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = jiacai.mm; sourceTree = "<group>"; };
+		01D08D4C1F6154A500BD9240 /* JCQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JCQueue.cpp; sourceTree = "<group>"; };
+		01D08D4D1F6154A500BD9240 /* JCQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JCQueue.hpp; sourceTree = "<group>"; };
+		01D08D4F1F626CC600BD9240 /* JCCustomer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JCCustomer.cpp; sourceTree = "<group>"; };
+		01D08D501F626CC600BD9240 /* JCCustomer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JCCustomer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				011BA0E11EEEBB3D00F94711 /* main.mm */,
-				01E5A35D1EF8F6E0006A9DBA /* jiacai.h */,
-				01E5A35E1EF8F6E0006A9DBA /* jiacai.mm */,
+				01D08D4C1F6154A500BD9240 /* JCQueue.cpp */,
+				01D08D4D1F6154A500BD9240 /* JCQueue.hpp */,
+				01D08D4F1F626CC600BD9240 /* JCCustomer.cpp */,
+				01D08D501F626CC600BD9240 /* JCCustomer.hpp */,
 			);
 			path = PracticesOne;
 			sourceTree = "<group>";
@@ -125,7 +130,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01E5A35F1EF8F6E0006A9DBA /* jiacai.mm in Sources */,
+				01D08D4E1F6154A500BD9240 /* JCQueue.cpp in Sources */,
+				01D08D511F626CC600BD9240 /* JCCustomer.cpp in Sources */,
 				011BA0E21EEEBB3D00F94711 /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

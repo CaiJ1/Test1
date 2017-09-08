@@ -7,80 +7,97 @@
 //
 
 #include <iostream>
-#import <fstream>
-#include <vector>
-#include <array>
-#include <string>
-//#include "jiacai.h"
-using namespace std;
+#include <cstdlib>
+#include <ctime>
+#include "JCQueue.hpp"
 
-template <typename T>   //or class T
-void Swap(T &a, T &b) {
-    T temp;
-    temp = a;
-    a = b;
-    b = temp;
-}
+const int MIN_PER_HR = 60;
 
-template <typename T>   //new template
-void Swap(T *a, T *b, int n) {
-    T temp;
-    for (int i = 0 ; i < n; i++) {
-        temp = a[i];
-        a[i] = b[i];
-        b[i] = temp;
-    }
-}
-const int Lim = 8;
-void Show(int a[]) {
-    cout << a[0] << a[1] << "/";
-    cout << a[2] << a[3] << "/";
-    for (int i = 4; i < Lim ; i++) {
-        cout << a[i];
-    }
-    cout  << endl;
-}
-
-void test() {
-  
-    int i = 10 ;
-    int j = 20;
-    cout << "i, j = " << i << ", " << j << endl;
-    cout << "Using compiler-generated int swappper\n";
-    Swap(i, j);
-    cout << "Now i, j = " << i << ", " << j << endl;
-    
-    double x = 22.2;
-    double y = 33.3;
-    cout << "x, y = " << x << ", " << y << endl;
-    cout << "Using compiler-generated doubel swapper\n";
-    Swap(x, y);
-     cout << "Now x, y = " << x << ", " << y << endl;
-    
-    
-    
-    int d1[Lim] {1,1,1,1,1,1,1};
-    int d2[Lim] {2,2,2,2,2,2,2,2};
-    cout << "Original arrays:\n";
-    Show(d1);
-    Show(d2);
-    
-    Swap(d1 , d2, Lim);
-    cout << "Swapped arrays:\n";
-    Show(d1);
-    Show(d2);
-    
-    cout << "Done!" << endl;
-    
-}
-
-
+bool newCustomer(double x);    //is there a new customer?
 
 int main(int argc, const char * argv[]) {
     
-    test();
+    using std::cin;
+    using std::cout;
+    using std::endl;
+    using std::ios_base;
     
-    cout << endl;
+    //setting things up
+    std::srand(std::time(0));      //random initializing of rand()
+    
+    cout << "Case study: Bank of Heather Automatic Teller\n";
+    cout << "Enter maximun size of queue:";
+    int qs;
+    cin >> qs;
+    Queue line(qs);         //line queue holds up to qs people
+    
+    cout << "Enter the number of simulation hours: ";
+    int hours;
+    cin >> hours;           //hours of simulation
+    //simulation will run 1 cycle per minute
+    long cycleLimit = MIN_PER_HR * hours;
+    
+    cout << "Enter the average number of customers per hour: ";
+    double perHour;         //average # of arrival per hour
+    cin >> perHour;
+    double min_per_cust;    //average time between arrivals
+    min_per_cust = MIN_PER_HR / perHour;
+    
+    Item temp;              // new customer data
+    long turnaways = 0;     // turned away by full queue
+    long customers = 0;     // joined the queue
+    long served = 0;        // served during the simulation
+    long sum_line = 0;      // cumulative line length
+    int wait_time = 0;      // time until autoteller is free
+    long line_wait = 0;     // cumulative time in line
+    
+    //running the simulation
+    for (int cycle = 0; cycle < cycleLimit; cycle++) {
+        if (newCustomer(min_per_cust)) {    //have newCustomer
+            if (line.isFull()) {
+                turnaways++;
+            }
+            else {
+                customers++;
+                temp.set(cycle);    //cycle = time of arrival
+                line.enQueue(temp); // add newcutomer to line
+            }
+        }
+        
+        if (wait_time <= 0 && !line.isEmpty()) {
+            line.deQueue(temp);    //attend next customer
+            wait_time = temp.pTime(); // for wait_time minutes
+            line_wait += cycle - temp.when();
+            served++;
+        }
+        
+        if (wait_time > 0) {
+            wait_time--;
+        }
+        sum_line += line.queueCount();
+        
+    }
+    
+    //reporting results
+    if (customers > 0) {
+        cout << "customers accepted: " << customers << endl;
+        cout << "customers served:   " << served << endl;
+        cout << "turnAways:          " << turnaways << endl;
+        cout << "average queue size: ";
+        cout.precision(2);
+        cout.setf(ios_base::fixed, ios_base::floatfield);
+        cout << (double)sum_line / cycleLimit << endl;
+        cout << "average wait time: " << (double) line_wait / served << " minutes\n";
+    }
+    else {
+        cout << "No customer!\n";
+    }
+    
+    cout << "Done!\n";
     
     return 0;
+}
+
+bool newCustomer(double x) {
+    return (std::rand() * x / RAND_MAX < 1);
 }
